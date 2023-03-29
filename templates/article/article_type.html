@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>文章分类</title>
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        {% if articles.items %}
+        {% for article in articles.items %}
+            <div class="article" style="border: goldenrod 1px solid">
+                <h2 class="mt-1"><a class="link-dark" href="{{ url_for('article.article_detail') }}?aid={{ article.id }}">{{ article.title }}</a></h2>
+                {# article.content读取过来是一堆二进制字符，因此需要自定义过滤器cdecode来进行解码；safe就是不对html的特殊标签字符转义<content里有html标签字符> #}
+                {# 有些时候添加的文章内容，发现网页结构变了，是因为内容中的html可能有样式冲突，因此建议使用富文本自己的样式，不要再给内容加额外的样式 #}
+                <div style="height: 7rem;overflow: hidden">{{ article.content | cdecode | safe }}</div>
+                <div class="mb-3 mt-3">
+                    <span style="color: royalblue">作者:{{ article.user.username }}&nbsp;&nbsp;&nbsp;</span>
+                    <span style="margin-left: 0">发布时间:{{ article.pdatetime }}&nbsp;&nbsp;&nbsp;</span>
+                    <span>收藏量:{{ article.save_num }}&nbsp;</span>
+                    <span>点击量:{{ article.click_num }}&nbsp;</span>
+                    <span>点赞量:{{ article.love_num }}&nbsp;</span>
+                </div>
+            </div>
+        {% endfor %}
+        {% else %}
+            <p>此分类暂无文章~~~~</p>
+        {% endif %}
+
+        <nav aria-label="Page navigation example" class="col-md-offset-5">
+            <ul class="pagination">
+                {# articles.has_prev 判断是否存在上一页，如果存在则可以点击，否则不能点击#}
+                <li class="page-item {% if not articles.has_prev %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('article.type_search') }}?page={{ articles.prev_num }}&tid={{ tid }}" aria-label="Previous"><span
+                            aria-hidden="true">&laquo;</span></a>
+                </li>
+
+                {% for page_num in range(1,articles.pages + 1) %}
+                    <li  class="page-item {% if articles.page == page_num %}active{% endif %}" >
+                            <a class="page-link" href="{{ url_for('article.type_search') }}?page={{ page_num }}&tid={{ tid }}">{{ page_num }}</a>
+                    </li>
+                {% endfor %}
+
+                {# articles.has_next 判断是否存在下一页，如果存在则可以点击，否则不能点击#}
+                <li class="page-item {% if not articles.has_next %}disabled{% endif %}">
+                    <a class="page-link" href="{{ url_for('article.type_search') }}?page={{ articles.next_num }}&tid={{ tid }}" aria-label="Next">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+        <div style="height: 3rem"></div>
+    </div>
+
+{% endblock %}

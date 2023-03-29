@@ -1,0 +1,128 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>首页</title>
+{% endblock %}
+
+{% block styles %}
+        #detail {
+            background-color: rgba(232, 243, 242, 0.6);
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px 50px;
+        }
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        <div id="detail">
+            <h2 class="mb-3" style="text-align: center">{{ article.title }}</h2>
+            <div class="d-flex justify-content-between">
+                <div id="left" style="margin-bottom: 30px">作者:{{ article.user.username }}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;发布时间: {{ article.pdatetime }}</div>
+                <div id="right">
+                    <span class="bi bi-suit-heart" aria-hidden="true"></span>&nbsp;&nbsp;<span tag="0">{{ article.save_num }}</span>
+                    &nbsp;&nbsp;&nbsp;&nbsp;
+                    <span class="bi bi-hand-thumbs-up" aria-hidden="true"></span>&nbsp;&nbsp;<span tag="0">{{ article.love_num }}</span>
+                </div>
+                {# <div></div> #}
+            </div>
+            <div id="content" style="border-bottom: white 1px solid;margin-bottom: 20px">
+                {{ article.content|cdecode|safe }}
+            </div>
+
+            <div id="comment">
+                <p style="margin-bottom: 10px">文章评论:</p>
+
+                <form action="{{ url_for('article.article_comment') }}" method="post">
+                    <input type="hidden" name="aid" value="{{ article.id }}">
+                    <textarea name="comment" class="form-control" style="width: 60%" rows="5" cols="60">写下你想说的，开始我们的对话
+                    </textarea>
+                    <p style="margin-top: 10px"><input type="submit" value="评论" class="btn btn-info"></p>
+                </form>
+
+                <p style="margin: 20px 5px; border-bottom: 1px solid lightgray"></p>
+                <div id="comment_item" style="margin-bottom: 30px">
+                    {% if comments.items %}
+                        {% for comment in comments.items %}
+                            <div class="row" style="margin-bottom: 30px">
+                                <div id="item_left" style="width: 80px;height: 60px" class="col-md-2">
+                                    <img src=" {% if comment.user.icon %} {{ url_for('static',filename=comment.user.icon) }} {% else %}{{ url_for('static',filename='image/img_demo.jpg') }}{% endif %}"
+                                         alt="" class="w-100 h-100">
+                                </div>
+                                <div id="item_right" class="col-md-10">
+                                    <p>
+                                        <span>{{ comment.user.username }}</span>
+                                        <span>{{ comment.cdatetime }}</span>
+                                    </p>
+                                    <p style="margin-bottom: 0">
+                                        {{ comment.comment }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="item">
+                            当前文章还没有任何评论，赶快发表意见吧～～～～
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div id="paginate">
+                    <ul class="pagination d-flex justify-content-between">
+                        {# pagination.has_prev 判断是否存在上一页，如果存在则可以点击，否则不能点击#}
+                        <li class="page-item {% if not comments.has_prev %}disabled{% endif %}">
+                            <a class="page-link" href="{{ url_for('article.article_detail') }}?page={{ comments.prev_num }}&aid={{ article.id }}" aria-label="Previous"><span
+                                    aria-hidden="true">&laquo;</span></a>
+                        </li>
+
+                        {# pagination.has_next 判断是否存在下一页，如果存在则可以点击，否则不能点击#}
+                        <li class="page-item {% if not comments.has_next %}disabled {% endif %}">
+                            <a class="page-link" href="{{ url_for('article.article_detail') }}?page={{ comments.next_num }}&aid={{ article.id }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            // 收藏
+            $('.bi-suit-heart').click(function () {
+
+            });
+
+            // 点赞
+            $('.bi-hand-thumbs-up').click(function () {
+
+                let $this = $(this);
+                let tag = $this.next('span').attr('tag');
+
+                $.get('{{ url_for('article.article_love') }}', {aid:{{article.id}},tag:tag}, function (data) {
+                    $this.next('span').text(data.num);
+
+                });
+                {# 注意：判断是==，不是=== #}
+                if (tag == 1) {
+                    $this.css({'color':'black'});
+                    $this.next('span').attr('tag',"0");
+                } else {
+                    $this.css({'color':'red'});
+                    $this.next('span').attr('tag',"1");
+                }
+
+
+            });
+
+            //文本域
+            $('textarea[name="comment"]').focus(function () {
+                $(this).val("")
+            });
+        })
+    </script>
+{% endblock %}

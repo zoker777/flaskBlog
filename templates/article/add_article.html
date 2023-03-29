@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>添加文章</title>
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        <form action="{{ url_for('article.publish_article') }}" method="post">
+            <p><input type="text" class="form-control" id="InputTitle" name="title"
+                    placeholder="请输入文章标题">
+            </p>
+
+            <p>
+                <select name="type" class="form-control">
+                    <option value="0">请选择文章分类</option>
+                    {% for type in g.types %}
+                        <option value="{{ type.id }}">{{ type.type_name }}</option>
+                    {% endfor %}
+                </select>
+            </p>
+
+            <p>
+                <textarea name="content" class="mytextarea"></textarea>
+            </p>
+
+            <p></p>
+            <p>
+                <button type="submit" class="btn btn-primary">发表文章</button>
+            </p>
+
+        </form>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='tinymce/tinymce.min.js') }}"></script>
+    <script>
+        $(function() {
+            //设置富文本
+            tinymce.init({
+                selector: '.mytextarea',
+                language: 'zh_CN',
+                height: 350,
+                plugins: "quickbars emoticons link table",
+                inline: false,
+                toolbar: true,
+                menubar: true,
+                quickbars_selection_toolbar: 'bold italic | link h2 h3 blockquote',
+                quickbars_insert_toolbar: 'quickimage quicktable',
+            });
+        })
+    </script>
+{% endblock %}

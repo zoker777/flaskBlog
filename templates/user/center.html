@@ -1,0 +1,257 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>用户中心</title>
+{% endblock %}
+
+{% block styles %}
+    #left p{
+        text-align: center;
+    }
+
+    #right h2{
+        text-align: center;
+    }
+    #Spread{
+        height: 1em;
+    }
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        <div class="row">
+            <h1 style="text-align: center">用户中心</h1>
+        </div>
+
+{#            <div class="row">#}
+{#                <div class="col-md-4">#}
+{#                </div>#}
+{#                <div class="col-md-8" style="background-color: rgb(205, 254, 255);">#}
+{#                    <div class="cright first">#}
+{#                        <form action="{{ url_for('user.user_change') }}" method="post" enctype="multipart/form-data">#}
+{#                            <p><input type="text" class="form-control" id="InputUsername" name="username"#}
+{#                                      value="{{ g.user.username }}">#}
+{#                            </p>#}
+{#                            <p><input type="text" class="form-control" id="InputPhone" name="phone" value="{{ g.user.phone }}"><span></span>#}
+{#                            </p>#}
+{#                            <p><input type="email" class="form-control" id="InputEmail1" name="email"#}
+{#                                      value="{{ g.user.email }}">#}
+{#                            </p>#}
+{#                            <p><input type="file" id="exampleInputFile" name="icon"></p>#}
+{#                            <p>#}
+{#                                <img src="{{ url_for('static',filename='images/img_demo.jpg') }}" alt="" width="90" height="100">#}
+{#                            </p>#}
+{#                            <p>#}
+{#                                <button type="submit" class="btn btn-primary">用户信息修改</button>#}
+{#                            </p>#}
+{#                        </form>#}
+{#                    </div>#}
+{#                </div>#}
+{#            </div>#}
+    <div class="row">
+        <div id="left" class="col-md-4">
+            <div id="Spread"></div>
+            <p>用户信息修改</p>
+            <p>发表文章</p>
+            <p>管理相册</p>
+            <p>管理留言</p>
+            <p>关于我设置</p>
+        </div>
+
+        <div id="right" class="col-md-8">
+            <div id="Spread"></div>
+            <div class="right1">
+{#                <h2> 用户信息修改</h2>#}
+                <form action="{{ url_for('user.user_change') }}" method="post" enctype="multipart/form-data">
+                    <p><input type="text" class="form-control" id="InputUsername" name="username"
+                            value="{{ g.user.username }}">
+                    </p>
+                    <p><input type="text" class="form-control" id="InputPhone" name="phone"
+                            value="{{ g.user.phone }}"><span></span>
+                    </p>
+                    <p><input type="email" class="form-control" id="InputEmail1" name="email"
+                            value="{{ g.user.email }}">
+                    </p>
+                    <p><input type="file" id="exampleInputFile" name="icon"></p>
+                    <span style="color: red">{{ msg }}</span>
+                    <p>
+                        <img src="{% if g.user.icon %} {{ url_for('static',filename=g.user.icon) }} {% else %}{{ url_for('static',filename='image/img_demo.jpg') }}{% endif %}"
+                            alt="" width="90"
+                            height="100">
+                    </p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">用户信息修改</button>
+                    </p>
+
+                </form>
+            </div>
+            <div class="right1">
+                <form action="{{ url_for('article.publish_article') }}" method="post">
+                    <p><input type="text" class="form-control" id="InputTitle" name="title"
+                            placeholder="请输入文章标题">
+                    </p>
+                    <p>
+                        <select name="type" class="form-control">
+                            <option value="0">请选择文章分类</option>
+                            {% for type in g.types %}
+                                <option value="{{ type.id }}">{{ type.type_name }}</option>
+                            {% endfor %}
+
+                        </select>
+                    </p>
+                    <p>
+                        <textarea name="content" class="mytextarea">
+
+                        </textarea>
+                    </p>
+                    <p></p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">发表文章</button>
+                    </p>
+
+                </form>
+            </div>
+            <div class="right1">
+                <form action="{{ url_for('user.upload_photo') }}" method="post" enctype="multipart/form-data"
+                      class="form-inline">
+                    <p>
+                        <input type="file" name="photo" class="form-control">
+                    </p>
+                    <p>
+                        {#  <input type="submit" value="上传相册" class="btn btn-primary"> #}
+                        <button type="submit" class="btn btn-primary">上传相册</button>
+                    </p>
+                </form>
+                <div>
+                    <h3 style="text-align: center">我的相册</h3>
+                    <div class="row">
+                    {% if photos %}
+                        {% for photo in photos %}
+                            <div class="col-md-4">
+                                <div style="height: 100px">
+                                    <img src="http://rh95c4ixc.bkt.clouddn.com/{{ photo.photo_name }}"
+                                         alt="" class="w-100 h-100">
+                                </div>
+                                <div style="text-align: center">
+                                    <button class="btn btn-info btn-sm photo-del" tag="{{ photo.id }}">删除</button>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <p>暂未上传图片</p>
+                    {% endif %}
+                    </div>
+                </div>
+            </div>
+            <div class="right1">
+                {% if g.user.messages %}
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>序号</th>
+                                <th>留言</th>
+                                <th>时间</th>
+                                <th>操作</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {% for message in g.user.messages %}
+                            <tr {% if loop.index%3==0 %}class="table-success" {% elif loop.index%3==1 %}class="table-primary"{% else %}class="table-info"{% endif %}>
+                                <td>{{ loop.index }}</td>
+                                <td>{{ message.content }}</td>
+                                <td>{{ message.mdatetime }}</td>
+                                {# 一般删除会增加弹框确认，如果要加弹框则不能用超链接，下面改为#,并且增加onclick事件，点击时触发js函数，函数里面添加弹框，并且用ajax来调用删除的接口 #}
+                                <td><a class="link-dark" href="{{ url_for('user.delete_board') }}?bid={{ message.id }}">删除留言</a></td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                {% else %}
+                    <p>还没有任何内容，可以去留言板去发言...</p>
+                {% endif %}
+            </div>
+            <div class="right1">
+                <form action="{{ url_for('user.about_me') }}" method="post" enctype="multipart/form-data">
+                    <p>
+                        <textarea name="about" class="mytextarea">
+
+                        </textarea>
+                    </p>
+                    <p></p>
+                    <p>
+                        <button type="submit" class="btn btn-primary">更改我的</button>
+                    </p>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    </div>
+
+
+{% endblock %}
+
+{% block scripts %}
+    <script src="{{ url_for('static',filename='tinymce/tinymce.min.js') }}"></script>
+    <script>
+        $(function(){
+            //设置富文本
+            tinymce.init({
+                selector: '.mytextarea',
+                language:'zh_CN',
+                height: 350,
+                plugins: "quickbars emoticons link table",
+                inline: false,
+                toolbar: true,
+                menubar: true,
+                quickbars_selection_toolbar: 'bold italic | link h2 h3 blockquote',
+                quickbars_insert_toolbar: 'quickimage quicktable',
+            });
+
+            $('.right1').hide();
+            $('.right1').eq(0).show();
+            $("#left p").first().css({'background-color': 'rgba(30, 150, 196, 0.94)'});
+            //切换右侧div
+            $("#left p").each(function (i) {
+                $(this).click(function () {
+                    $("#left p").css({'background-color': 'white'});
+                    $("#left p").eq(i).css({'background-color': 'rgba(30, 150, 196, 0.94)'});
+                    // $(this).css({'background-color': 'skyblue', 'box-shadow': '5px 5px 5px deepskyblue'});
+                    $('.right1').hide();
+                    $('.right1').eq(i).show();
+                });
+            });
+
+            //验证手机号码
+            $('#InputPhone').blur(function () {
+                let phone = $(this).val();
+                let span_ele = $(this).next('span');
+                if (phone.length === 11) {
+                    span_ele.text('');
+                    $.get('{{ url_for('user.check_phone') }}', {phone: phone}, function (data) {
+                        // {#console.log(data);#}
+                        if (data.code !== 200) {
+                            span_ele.css({"color": "#ff0011", "font-size": "12px"});
+                            span_ele.text(data.msg);
+                        }
+                    })
+                } else {
+                    span_ele.css({"color": "#ff0011", "font-size": "12px"});
+                    span_ele.text('手机格式错误');
+                }
+            });
+
+            //相册图片的删除
+            $('.photo-del').click(function () {
+                // console.log('--->');
+                flag = confirm('确定删除此图片吗？');
+                if (flag) {
+                    //获取属性值tag，tag属性的是就是图片的主键
+                    let pid = $(this).attr('tag');
+                    //1.ajax, 2.location.href #如果js代码单独放到了一个js文件中，那么只能用/user/photo_del，否则可用双花括号url_for获取路径
+                    location.href = '/user/photo_del?pid=' + pid;
+                }
+            });
+        })
+    </script>
+
+{% endblock %}

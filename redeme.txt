@@ -1,0 +1,24 @@
+
+python.exe -m pip install flask==1.1.4
+    # 打开terminal，直接python -m pip<直接pip也行> install flask==1.1.4即可安装，或pip list查看<因为自动source了当前目录下的venv>
+## flask-bootstrap
+
+
+.\venv\Scripts\python.exe app.py db init
+.\venv\Scripts\python.exe app.py db migrate
+.\venv\Scripts\python.exe app.py db upgrade
+直接python.exe app.py db init/migrate/upgrade即可
+
+
+html模板快捷键<下面的内容输完按tab>：
+td.3 创建一对class=3的td标签
+td.3.4 创建一对class=3 class=4的td标签
+td*3 创建3对td标签
+block+tab jinja标签也可以tab出来
+
+session有效时间：默认浏览器退出即失效
+服务器端执行这条命令后session['user_id'] = user.id，返回重定向的response给浏览器并同时自动给浏览器设置cookie，然后浏览器访问重定向的url时便会携带上cookie
+
+# 待优化代码处
+1、用户login时验证用户密码可以用check_password_hash <也就是数据库存储hash值>
+2、

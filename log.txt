@@ -1,0 +1,55 @@
+2022-09-11 10:43:19,659 - apps - INFO - 用户正在访问用户中心页面
+2022-09-11 11:14:34,637 - INFO - user_view.py - user_center - 95 - 用户正在访问用户中心页面
+2022-09-11 11:18:39,566 - INFO - user_view.py - user_center - 95 - 用户正在访问用户中心页面
+2022-09-11 17:13:02,834 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/logout
+2022-09-11 17:13:02,958 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/
+2022-09-11 17:13:05,817 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/showabout
+2022-09-11 17:13:13,185 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/sendMsg
+2022-09-11 17:16:01,276 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/login
+2022-09-11 17:16:01,286 - INFO - user_view.py - login - 147 - valid_code=746032,code=959300
+2022-09-11 17:17:20,587 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/sendMsg
+2022-09-11 17:17:50,433 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/login
+2022-09-11 17:17:50,440 - INFO - user_view.py - login - 147 - valid_code=896217,code=896217
+2022-09-11 17:17:50,449 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/
+2022-09-11 17:17:50,517 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/icon_test_1.jpeg
+2022-09-11 17:17:52,834 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/center
+2022-09-11 17:17:52,840 - INFO - user_view.py - user_center - 96 - 用户正在访问用户中心页面
+2022-09-11 17:17:52,965 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/tinymce.min.js
+2022-09-11 17:17:53,074 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/themes/silver/theme.min.js
+2022-09-11 17:17:53,208 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/langs/zh_CN.js
+2022-09-11 17:17:53,221 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/icons/default/icons.min.js
+2022-09-11 17:17:53,237 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/plugins/quickbars/plugin.min.js
+2022-09-11 17:17:53,253 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/plugins/emoticons/plugin.min.js
+2022-09-11 17:17:53,270 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/plugins/link/plugin.min.js
+2022-09-11 17:17:53,311 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/plugins/table/plugin.min.js
+2022-09-11 17:17:53,395 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/skins/ui/oxide/skin.min.css
+2022-09-11 17:17:53,481 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/skins/ui/oxide/content.min.css
+2022-09-11 17:17:53,502 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/skins/content/default/content.min.css
+2022-09-11 17:17:53,626 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/plugins/emoticons/js/emojis.min.js
+2022-09-11 17:20:26,194 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/
+2022-09-11 17:20:27,988 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/detail
+2022-09-11 17:20:28,216 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/image/img_demo.jpg
+2022-09-11 17:20:28,242 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/icon_test_6.jpeg
+2022-09-11 17:20:28,257 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/img_1.jpg
+2022-09-11 17:20:28,290 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/font/fonts/bootstrap-icons.woff2
+2022-09-11 17:20:31,511 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/showabout
+2022-09-11 17:20:34,001 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/type_search
+2022-09-11 17:20:36,636 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/type_search
+2022-09-11 17:20:38,126 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/type_search
+2022-09-11 17:20:41,190 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/myphoto
+2022-09-11 17:20:43,284 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/myphoto
+2022-09-11 17:20:43,874 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/board
+2022-09-11 17:20:48,144 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/myphoto
+2022-09-11 17:20:49,059 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/board
+2022-09-11 17:20:52,352 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/center
+2022-09-11 17:20:52,360 - INFO - user_view.py - user_center - 96 - 用户正在访问用户中心页面
+2022-09-11 17:20:52,615 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/langs/zh_CN.js
+2022-09-11 17:21:11,198 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/publish
+2022-09-11 17:21:11,475 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/tinymce/langs/zh_CN.js
+2022-09-11 17:21:45,938 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/logout
+2022-09-11 17:21:45,953 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /user/
+2022-09-11 17:21:48,593 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /article/detail
+2022-09-11 17:21:48,649 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/icon_test_1.jpeg
+2022-09-11 17:21:48,708 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/image/img_demo.jpg
+2022-09-11 17:21:48,717 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/icon_test_6.jpeg
+2022-09-11 17:21:48,728 - INFO - user_view.py - before_request - 30 - before_app_request钩子函数正在处理路由: /static/upload/icon/img_1.jpg

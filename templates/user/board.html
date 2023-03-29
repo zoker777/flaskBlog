@@ -1,0 +1,85 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>留言</title>
+{% endblock %}
+
+{% block styles %}
+        #detail {
+            background-color: rgba(232, 243, 242, 0.6);
+            border-radius: 10px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+            padding: 20px 50px;
+        }
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        <div id="detail">
+            <div id="comment">
+                <p style="margin-bottom: 10px">用户留言:</p>
+                <form action="{{ url_for('user.show_board') }}" method="post">
+                    <textarea name="board" class="form-control" style="width: 60%" rows="5" cols="60">写下你想说的，开始我们的对话
+                    </textarea>
+                    <p style="margin-top: 10px"><input type="submit" value="发表留言" class="btn btn-info"></p>
+                </form>
+                <p style="margin: 20px 5px; border-bottom: 1px solid lightgray"></p>
+
+                <div id="comment_item" style="margin-bottom: 30px">
+                    {% if boards.items %}
+                        {% for board in boards.items %}
+                            <div class="row" style="margin-bottom: 30px">
+                                <div id="item_left" style="width: 80px;height: 60px" class="col-md-2">
+                                    <img src=" {% if board.user.icon %} {{ url_for('static',filename=board.user.icon) }} {% else %}{{ url_for('static',filename='image/img_demo.jpg') }}{% endif %}"
+                                         alt="" class="w-100 h-100">
+                                </div>
+                                <div id="item_right" class="col-md-10">
+                                    <p>
+                                        <span>{% if not board.user_id %} 匿名用户 {% else %} {{ board.user.username }} {% endif %}</span>
+                                        <span>{{ board.mdatetime }}</span>
+                                    </p>
+                                    <p style="margin-bottom: 0">
+                                        {{ board.content }}
+                                    </p>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="item">
+                            还没有任何的留言，赶快发表吧！～～～～
+                        </div>
+                    {% endif %}
+                </div>
+
+                <div id="paginate">
+                    <ul class="pagination d-flex justify-content-between">
+                        {# pagination.has_prev 判断是否存在上一页，如果存在则可以点击，否则不能点击#}
+                        <li class="page-item {% if not boards.has_prev %}disabled {% endif %}">
+                            <a class="page-link" href="{{url_for('user.show_board')}}?page={{ boards.prev_num }}" aria-label="Previous"><span
+                                    aria-hidden="true">&laquo;</span></a>
+                        </li>
+
+                        {# pagination.has_next 判断是否存在下一页，如果存在则可以点击，否则不能点击#}
+                        <li class="page-item {% if not boards.has_next %}disabled {% endif %}">
+                            <a class="page-link" href="{{url_for('user.show_board')}}?page={{ boards.next_num }}" aria-label="Next">
+                                <span aria-hidden="true">&raquo;</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block scripts %}
+    <script>
+        $(function () {
+            //文本域
+            $('textarea[name="board"]').focus(function () {
+                $(this).val("")
+            });
+        })
+    </script>
+{% endblock %}

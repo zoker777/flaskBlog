@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block title %}
+    <title>注册</title>
+{% endblock %}
+
+{% block styles %}
+    h1 {
+        text-align: center;
+        margin-bottom: 20px;
+    }
+{% endblock %}
+
+{% block newcontent %}
+    <div class="container">
+        <div class="row">
+            <h1 class="col-md-6 offset-md-3" >用户注册</h1>
+        </div>
+        <form class="form-horizontal" href="{{ url_for('user.register') }}" method="post">
+            <div class="form-group d-flex mb-2">
+                <label for="inputusername" class="col-form-label col-md-1 offset-md-4 ">用户名</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="inputusername" name="username" placeholder="username">
+                </div>
+            </div>
+
+            <div class="form-group d-flex mb-2">
+                <label for="inputPassword" class="col-form-label col-md-1 offset-md-4">密码</label>
+                <div class="col-md-4">
+                  <input type="password" class="form-control" id="inputPassword" name="password" placeholder="password">
+                </div>
+            </div>
+            <div class="form-group d-flex">
+                <label for="inputphone" class="col-form-label col-md-1 offset-md-4">手机号</label>
+                <div class="col-md-4">
+                  <input type="text" class="form-control" id="inputphone" name="phone" placeholder="phone">
+                  <p style="color: red">{{ msg }}</p>
+                </div>
+            </div>
+
+            <div class="form-group">
+                {# 如果想让div里面的button居中，有个简单的办法，只给button的父div一列col-md-1，即可居中 #}
+                <div class="col-md-2 offset-md-5">
+                  <button type="submit" class="btn btn-primary w-100">注册</button>
+                </div>
+            </div>
+        </form>
+    </div>
+{% endblock %}
